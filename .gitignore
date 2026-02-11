@@ -1,0 +1,5 @@
+*.log
+.env
+ngrok.yml
+__pycache__/
+*.retry

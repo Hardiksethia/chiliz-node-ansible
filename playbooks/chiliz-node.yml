@@ -1,0 +1,7 @@
+---
+- name: Setup Chiliz Testnet Full Node (Docker)
+  hosts: chiliz
+  become: true
+
+  roles:
+    - chiliz

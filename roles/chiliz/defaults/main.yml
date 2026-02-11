@@ -1,0 +1,16 @@
+# Chiliz node configuration
+chiliz_user: chiliz
+
+chiliz_base_dir: /opt/chiliz
+chiliz_data_dir: /opt/chiliz/data
+
+# Network: spicy = testnet
+chiliz_network_flag: "--spicy"
+
+# Docker image (official)
+chiliz_docker_image: chilizchain/ccv2-geth:latest
+
+# Ports
+chiliz_http_port: 8545
+chiliz_ws_port: 8546
+

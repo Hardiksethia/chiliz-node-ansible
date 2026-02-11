@@ -1,0 +1,17 @@
+[Unit]
+Description=Chiliz Testnet Node
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User={{ chiliz_user }}
+Group={{ chiliz_user }}
+ExecStart={{ chiliz_install_dir }}/{{ chiliz_binary_name }} start \
+  --home {{ chiliz_data_dir }}
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+

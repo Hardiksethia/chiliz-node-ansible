@@ -1,0 +1,4 @@
+nginx_listen_port: 80
+
+rpc_upstream: http://127.0.0.1:8545
+metrics_upstream: http://127.0.0.1:6060/debug/metrics/prometheus

@@ -1,0 +1,7 @@
+- name: Setup Nginx Reverse Proxy for Chiliz
+  hosts: localhost
+  become: true
+
+  roles:
+    - nginx
+

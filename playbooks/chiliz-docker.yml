@@ -1,0 +1,51 @@
+- name: Setup Chiliz Spicy Testnet Node (Docker)
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - docker.io
+          - curl
+        state: present
+        update_cache: true
+
+    - name: Enable and start Docker
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Create Chiliz data directory
+      file:
+        path: /var/lib/chiliz
+        state: directory
+        mode: "0755"
+
+    - name: Run Chiliz Spicy Testnet node
+      docker_container:
+        name: chiliz-node
+        image: chilizchain/ccv2-geth:latest
+        state: started
+        restart_policy: always
+        published_ports:
+          - "8545:8545"
+          - "8546:8546"
+        volumes:
+          - /var/lib/chiliz:/datadir
+        command: >
+          --spicy
+          --datadir=/datadir
+          --ipcdisable
+          --http
+          --http.addr=0.0.0.0
+          --http.api=eth,net,web3,debug,txpool
+          --http.port=8545
+          --http.corsdomain="*"
+          --http.vhosts="*"
+          --ws
+          --ws.addr=0.0.0.0
+          --ws.api=eth,net,web3,debug,txpool
+          --ws.port=8546
+          --ws.origins="*"

@@ -1,0 +1,7 @@
+---
+- name: Configure Nginx Reverse Proxy for Chiliz Node
+  hosts: all
+  become: true
+
+  roles:
+    - nginx

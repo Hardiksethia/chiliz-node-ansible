@@ -1,0 +1,36 @@
+
+
+version: "3.8"
+
+services:
+  chiliz-node:
+    image: chilizchain/ccv2-geth:latest
+    container_name: chiliz-node
+    restart: unless-stopped
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "6060:6060"   # metrics
+      - "30303:30303/tcp"
+      - "30303:30303/udp"
+    volumes:
+      - /opt/chiliz/data:/datadir
+    command: >
+      geth
+      --spicy
+      --datadir=/datadir
+      --ipcdisable
+      --http
+      --http.addr=0.0.0.0
+      --http.port=8545
+      --http.api=eth,net,web3,debug,txpool
+      --http.corsdomain="*"
+      --http.vhosts="*"
+      --ws
+      --ws.addr=0.0.0.0
+      --ws.port=8546
+      --ws.api=eth,net,web3,debug,txpool
+      --metrics
+      --metrics.addr=0.0.0.0
+      --metrics.port=6060
+

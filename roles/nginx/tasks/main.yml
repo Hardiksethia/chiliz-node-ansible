@@ -1,0 +1,24 @@
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Remove default nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Deploy chiliz nginx config
+  template:
+    src: chiliz.conf.j2
+    dest: /etc/nginx/sites-available/chiliz
+  notify: Restart nginx
+
+- name: Enable chiliz site
+  file:
+    src: /etc/nginx/sites-available/chiliz
+    dest: /etc/nginx/sites-enabled/chiliz
+    state: link
+  notify: Restart nginx
+
